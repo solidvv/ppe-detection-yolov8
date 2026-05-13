@@ -1,0 +1,15 @@
+services:
+  yolo-worker:
+    build: .
+    image: yolo-app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - .:/ultralytics
+      - ./datasets:/ultralytics/datasets
+      - ./runs:/ultralytics/runs
